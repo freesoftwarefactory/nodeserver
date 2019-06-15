@@ -141,9 +141,10 @@ module.exports = function(routes)
         var proto = require("https");
         var key = fs.readFileSync(routes.privatekey).toString();
         var cert = fs.readFileSync(routes.certificate).toString();
+        var pass = routes.passphrase;
         console.log("https://localhost:"+routes.port+" (is now active) using:\n"
             +"cert:"+routes.certificate+"\nkey:"+routes.privatekey+"\n");
-        proto.createServer({key:key,cert:cert},handler).listen(routes.port);
+        proto.createServer({key:key,cert:cert,passphrase:pass},handler).listen(routes.port);
     }else{
         var proto = require("http");
         console.log("http://localhost:"+routes.port+" (is now active)");	
